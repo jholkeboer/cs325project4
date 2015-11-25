@@ -7,6 +7,12 @@
 # Jack Holkeboer
 
 import sys, os
+from math import sqrt, round
+
+def node_distance(node1, node2):
+	# each node is an array [x,y]
+	distance = int(round(sqrt( (node1[0]-node2[0])^2 + (node1[1]-node2[1])^2 )))
+	return distance
 
 def import_problem(inputfile):
 	nodes = {}
