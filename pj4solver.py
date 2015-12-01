@@ -11,7 +11,7 @@
 import sys, os
 from math import sqrt
 import itertools
-import timeit
+import datetime
 
 def node_distance(node1, node2):
 	# each node is an array [x,y]
@@ -58,9 +58,9 @@ if len(sys.argv) == 2:
 	outputfile = inputfile + ".tour"
 	nodes = import_problem(inputfile)
 
-	start = timeit.timeit()
+	start = datetime.datetime.now()
 	tour = tsp(nodes)
-	end = timeit.timeit()
+	end = datetime.datetime.now()
 	print tour
 	print "Time elapsed: ", (end - start)
 	# export_solution(tour, outputfile)
