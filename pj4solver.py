@@ -19,11 +19,13 @@ def node_distance(node1, node2):
 	return distance
 
 def import_problem(inputfile):
-	nodes = {}
+	# nodes = {}
+	nodes = []
 	with open(inputfile) as f:
 		for line in f:
 			parsed_line = line.strip().split(" ")
-			nodes[int(parsed_line[0])] = [int(parsed_line[1]), int(parsed_line[2])]
+			# nodes[int(parsed_line[0])] = [int(parsed_line[1]), int(parsed_line[2])]
+			nodes.append([int(parsed_line[1]), int(parsed_line[2])])
 	return nodes
 
 def export_solution(tour, outputfile):
@@ -33,23 +35,23 @@ def export_solution(tour, outputfile):
 			f.write(str(node) + "\n")
 
 def tsp(nodes):
-	tour = {}
+	tour = {'length': 0, 'path': []}
 	node_count = len(nodes)
 
-	all_distances = [[node_distance(nodes[x], nodes[y]) for y in sorted(nodes)] for x in sorted(nodes)]
-	A = {(frozenset([0, idx+1]), idx+1): (dist, [0,idx+1]) for idx,dist in enumerate(all_distances[0][1:])}
+	# all_distances = [[node_distance(nodes[x], nodes[y]) for y in sorted(nodes)] for x in sorted(nodes)]
+	# A = {(frozenset([0, idx+1]), idx+1): (dist, [0,idx+1]) for idx,dist in enumerate(all_distances[0][1:])}
 	
-	for node in range(2, node_count):
-		print "Node ", node
-		B = {}
-		for S in [frozenset(C) | {0} for C in itertools.combinations(range(1, node_count), node)]:
-			for j in S - {0}:
-				B[(S, j)] = min( [(A[(S-{j},k)][0] + all_distances[k][j], A[(S-{j},k)][1] + [j]) for k in S if k != 0 and k!=j])
-		A = B
+	# for node in range(2, node_count):
+	# 	print "Node ", node
+	# 	B = {}
+	# 	for S in [frozenset(C) | {0} for C in itertools.combinations(range(1, node_count), node)]:
+	# 		for j in S - {0}:
+	# 			B[(S, j)] = min( [(A[(S-{j},k)][0] + all_distances[k][j], A[(S-{j},k)][1] + [j]) for k in S if k != 0 and k!=j])
+	# 	A = B
 
-	res = min([(A[d][0] + all_distances[0][d[1]], A[d][1]) for d in iter(A)])
-	tour['path'] = res[1]
-	tour['length'] = res[0]
+	# res = min([(A[d][0] + all_distances[0][d[1]], A[d][1]) for d in iter(A)])
+	# tour['path'] = res[1]
+	# tour['length'] = res[0]
 	return tour
 
 
