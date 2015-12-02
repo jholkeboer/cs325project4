@@ -18,6 +18,8 @@ def node_distance(node1, node2):
 	distance = int(round(sqrt( (node1[0]-node2[0])**2 + (node1[1]-node2[1])**2 )))
 	return distance
 
+
+
 def import_problem(inputfile):
 	# nodes = {}
 	nodes = []
@@ -34,11 +36,18 @@ def export_solution(tour, outputfile):
 		for node in tour['path']:
 			f.write(str(node) + "\n")
 
-def tsp(nodes):
-	tour = {'length': 0, 'path': []}
-	node_count = len(nodes)
+def tsp(points):
 
-	print nodes
+    start = points[0]
+    must_visit = points
+    path = [start]
+    must_visit.remove(start)
+    while must_visit:
+        nearest = min(must_visit, key=lambda x: node_distance(path[-1], x))
+        path.append(nearest)
+        must_visit.remove(nearest)
+
+    #print path
 	
 	
 	# all_distances = [[node_distance(nodes[x], nodes[y]) for y in sorted(nodes)] for x in sorted(nodes)]
@@ -55,7 +64,7 @@ def tsp(nodes):
 	# res = min([(A[d][0] + all_distances[0][d[1]], A[d][1]) for d in iter(A)])
 	# tour['path'] = res[1]
 	# tour['length'] = res[0]
-	return tour
+    return path
 
 
 if len(sys.argv) == 2:
@@ -73,3 +82,9 @@ if len(sys.argv) == 2:
 	
 else:
 	print "Usage: pj4solver.py [inputfile]"
+	
+def print_sol(sol):
+    num = 0
+    for x in range(0,len(sol)):
+        print(str(x)+ '  ' + str(sol[x][0]) + '  ' + str(sol[x][1]))
+        x += 1
