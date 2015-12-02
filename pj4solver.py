@@ -38,6 +38,9 @@ def tsp(nodes):
 	tour = {'length': 0, 'path': []}
 	node_count = len(nodes)
 
+	print nodes
+	
+	
 	# all_distances = [[node_distance(nodes[x], nodes[y]) for y in sorted(nodes)] for x in sorted(nodes)]
 	# A = {(frozenset([0, idx+1]), idx+1): (dist, [0,idx+1]) for idx,dist in enumerate(all_distances[0][1:])}
 	
