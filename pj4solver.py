@@ -24,6 +24,8 @@ def import_problem(inputfile):
 	with open(inputfile) as f:
 		for line in f:
 			parsed_line = line.strip().split(" ")
+			while '' in parsed_line:
+				parsed_line.remove('')
 			node_dict[parsed_line[1] + "-" + parsed_line[2]] = int(parsed_line[0])
 			nodes.append([int(parsed_line[1]), int(parsed_line[2])])
 	return nodes, node_dict
@@ -66,9 +68,9 @@ if len(sys.argv) == 2:
 	start = datetime.datetime.now()
 	tour = tsp(nodes, node_dict)
 	end = datetime.datetime.now()
-	print tour
+
 	print "Time elapsed: ", (end - start)
-	# export_solution(tour, outputfile)
+	export_solution(tour, outputfile)
 	
 else:
 	print "Usage: pj4solver.py [inputfile]"
