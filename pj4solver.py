@@ -39,8 +39,8 @@ def export_solution(tour, outputfile):
 			f.write(str(node) + "\n")
 
 def tsp(points, node_dict):
-	keep_points = points
-	print keep_points
+	keep_points = list(points)
+
 	start = points[0]
 	must_visit = points
 	path = [start]
@@ -50,11 +50,12 @@ def tsp(points, node_dict):
 		path.append(nearest)
 		must_visit.remove(nearest)
 	tour = {'length': 0, 'path': []}
+
 	# calculate path length
 	path_count = 0
 	print keep_points
 	for i in range(len(path)):
-		# print keep_points.index(path[i])
+		tour['path'].append(keep_points.index(path[i]))
 		tour['length'] += node_distance(path[i], path[i-1])	
 	
 	# get node indices
