@@ -56,6 +56,7 @@ def tsp(points, node_dict):
 	# calculate path length
 	for i in range(1, len(path)):
 		tour['length'] += node_distance(path[i-1],path[i])
+		tour['length'] += node_distance(path[len(path)-1], path[0])
 
 	return tour
 
