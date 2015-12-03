@@ -49,8 +49,6 @@ def tsp(points):
 	tour = {'length': 0, 'path': []}
 
 	# calculate path length
-	path_count = 0
-	print keep_points
 	for i in range(len(path)):
 		if keep_points.index(path[i]) not in tour['path']:
 			tour['path'].append(keep_points.index(path[i]))
