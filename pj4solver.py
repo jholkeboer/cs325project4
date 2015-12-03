@@ -18,6 +18,7 @@ def node_distance(node1, node2):
 	distance = int(round(sqrt( (node1[0]-node2[0])**2 + (node1[1]-node2[1])**2 )))
 	return distance
 
+
 def import_problem(inputfile):
 	node_dict = {}
 	nodes = []
@@ -54,9 +55,8 @@ def tsp(points, node_dict):
 		tour['path'].append(node_dict[node_key])
 	
 	# calculate path length
-	for i in range(1, len(path)):
-		tour['length'] += node_distance(path[i-1],path[i])
-		tour['length'] += node_distance(path[len(path)-1], path[0])
+	for i in range(len(path)):
+		tour['length'] += node_distance(path[i], path[i-1])
 
 	return tour
 
