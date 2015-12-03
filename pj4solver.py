@@ -23,6 +23,7 @@ def import_problem(inputfile):
 	node_dict = {}
 	nodes = []
 	with open(inputfile) as f:
+		index = 0
 		for line in f:
 			parsed_line = line.strip().split(" ")
 			while '' in parsed_line:
@@ -38,6 +39,8 @@ def export_solution(tour, outputfile):
 			f.write(str(node) + "\n")
 
 def tsp(points, node_dict):
+	keep_points = points
+	print keep_points
 	start = points[0]
 	must_visit = points
 	path = [start]
@@ -46,17 +49,19 @@ def tsp(points, node_dict):
 		nearest = min(must_visit, key=lambda x: node_distance(path[-1], x))
 		path.append(nearest)
 		must_visit.remove(nearest)
-	
 	tour = {'length': 0, 'path': []}
+	# calculate path length
+	path_count = 0
+	print keep_points
+	for i in range(len(path)):
+		# print keep_points.index(path[i])
+		tour['length'] += node_distance(path[i], path[i-1])	
 	
 	# get node indices
 	for n in path:
 		node_key = str(n[0]) + "-" + str(n[1])
 		tour['path'].append(node_dict[node_key])
-	
-	# calculate path length
-	for i in range(len(path)):
-		tour['length'] += node_distance(path[i], path[i-1])
+
 
 	return tour
 
@@ -71,7 +76,7 @@ if len(sys.argv) == 2:
 	end = datetime.datetime.now()
 
 	print "Time elapsed: ", (end - start)
-	export_solution(tour, outputfile)
+	# export_solution(tour, outputfile)
 	
 else:
 	print "Usage: pj4solver.py [inputfile]"
